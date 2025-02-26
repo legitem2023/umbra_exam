@@ -58,7 +58,7 @@ const Task: React.FC<TaskProps> = ({
 
               <Dropdown tag={tags} id={id}/>
             </div>
-            <div className="flex flex-col absolute left-0 bottom-0 m-2 ">
+            <div className="flex flex-col absolute left-0 bottom-0 m-4 ">
                 <p className="text-md">Created Date: {createdAt}</p>
                 <p className="text-md">Due Date: {dueDate}</p>
             </div>
