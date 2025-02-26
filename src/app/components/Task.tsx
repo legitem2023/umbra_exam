@@ -48,7 +48,7 @@ const Task: React.FC<TaskProps> = ({
           className={`relative bg-white p-4 rounded-lg shadow-md mb-4` + ` ${isOverdue(dueDate || '')}`}
         >
           {columns==='Done'?(<Done/>):(<></>)}
-<div className="absolute top-0 right-0 m-4">
+<div className="absolute top-0 right-0 m-2">
 <ThreeDotMenu 
   child1={()=>(
         <button onClick={onEdit} className="text-blue-500 hover:text-blue-700">
