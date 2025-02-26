@@ -8,7 +8,7 @@ import { RootState } from '../Redux/store';
 import EditTaskModal from './EditTaskModal';
 import { Task } from '../Types/types';
 import Loading from './UI/Loading';
-
+import { Icon } from '@iconify/react/dist/iconify.js';
 const Board: React.FC = () => {
   const dispatch = useDispatch();
   const columns = useSelector((state: RootState) => state.tasks.columns);
