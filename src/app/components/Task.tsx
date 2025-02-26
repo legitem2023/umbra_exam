@@ -50,23 +50,23 @@ const Task: React.FC<TaskProps> = ({
           {columns==='Done'?(<Done/>):(<></>)}
 
           <h3 className="font-semibold">{title}</h3>
-          {description && <p className="text-sm text-gray-600 min-h-[100px]">{description}</p>}
+          {description && <p className="text-md min-h-[100px]">{description}</p>}
 
         
             <div className="flex items-center">
-            <p className="text-sm text-gray-500">Tags:</p>
+            <p className="text-md">Tags:</p>
 
               <Dropdown tag={tags} id={id}/>
             </div>
             <div className="flex flex-col absolute left-0 bottom-0 m-2 ">
-                <p className="text-sm text-gray-500">Created Date: {createdAt}</p>
-                <p className="text-sm text-gray-500">Due Date: {dueDate}</p>
+                <p className="text-md">Created Date: {createdAt}</p>
+                <p className="text-md">Due Date: {dueDate}</p>
             </div>
         {/* */}
         <div>
           {columns==='To Do'?(<>
             <div className="flex justify-end m-1 space-x-1">
-            <button onClick={onMoveRight} className="text-gray-500 hover:text-gray-700 w-8">
+            <button onClick={onMoveRight} className="hover:text-gray-700 w-8">
                <Icon icon="ic:sharp-double-arrow" width="24" height="24"  className='text-black-800 hover:text-orange-700' />
             </button>
           </div>
@@ -74,7 +74,7 @@ const Task: React.FC<TaskProps> = ({
           
           {columns==='In Progress'?(<>
             <div className="flex justify-end m-1 space-x-1">
-            <button onClick={onMoveRight} className="text-gray-500 hover:text-gray-700 w-8">
+            <button onClick={onMoveRight} className="hover:text-gray-700 w-8">
                <Icon icon="ic:sharp-double-arrow" width="24" height="24"  style={{color: "#000000"}} />
             </button>
           </div>
