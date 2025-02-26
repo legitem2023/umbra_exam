@@ -1,11 +1,23 @@
-import React,{ useState,ReactNode,ReactElement,FC} from "react";
+import React,{ useRef,useState,ReactNode,ReactElement,FC} from "react";
 import {ThreeDotProps} from '../../Types/types';
 
 const ThreeDotMenu:FC<ThreeDotProps> = ({child1,child2}) => {
   const [isOpen, setIsOpen] = useState(false);
+ const dropdownRef = useRef();
+  // Handle click outside dropdown
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      setIsOpen(false);
+    }
+  }, []);
 
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [handleClickOutside]);
+  
   return (
-    <div className="relative inline-block text-left">
+    <div ref={dropdownRef} className="relative inline-block text-left">
       {/* Three Dots Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
