@@ -51,12 +51,12 @@ const Task: React.FC<TaskProps> = ({
 <div className="absolute top-0 right-0 m-2">
 <ThreeDotMenu 
   child1={()=>(
-        <button onClick={onEdit} className="text-blue-500 hover:text-blue-700">
+        <button onClick={onEdit} className="text-blue-500 hover:text-blue-700 flex flex-col">
             <Icon icon="tabler:edit" width="30" height="30"  style={{color: "#f49f00"}} /> Edit
         </button> 
   )}
   child2={()=>(
-      <button onClick={onDelete} className="text-red-500 hover:text-red-700">
+      <button onClick={onDelete} className="text-red-500 hover:text-red-700 flex flex-col">
             <Icon icon="ph-trash-fill" width="30" height="30"  style={{color: "#f40000"}} /> Delete
       </button>
   )}
