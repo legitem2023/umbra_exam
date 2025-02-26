@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react/dist/iconify.js';
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import Done from './Stages/Done';
-
+import ThreeDotMenu './UI/ThreeDotMenu';
 import { TaskProps } from '../Types/types';
 import Dropdown from './UI/Dropdown';
 
@@ -48,7 +48,9 @@ const Task: React.FC<TaskProps> = ({
           className={`relative bg-white p-4 rounded-lg shadow-md mb-4` + ` ${isOverdue(dueDate || '')}`}
         >
           {columns==='Done'?(<Done/>):(<></>)}
-
+<div className="absolute top-0 right-0 m-4">
+<ThreeDotMenu/>
+</div>
           <h3 className="font-semibold">{title}</h3>
           {description && <p className="text-sm min-h-[100px]">{description}</p>}
 
