@@ -52,12 +52,12 @@ const Task: React.FC<TaskProps> = ({
 <ThreeDotMenu 
   child1={()=>(
         <button onClick={onEdit} className="text-blue-500 hover:text-blue-700">
-            <Icon icon="tabler:edit" width="24" height="24"  style={{color: "#f49f00"}} />
+            <Icon icon="tabler:edit" width="30" height="30"  style={{color: "#f49f00"}} />
         </button> 
   )}
   child2={()=>(
       <button onClick={onDelete} className="text-red-500 hover:text-red-700">
-            <Icon icon="ph-trash-fill" width="24" height="24"  style={{color: "#f40000"}} />
+            <Icon icon="ph-trash-fill" width="30" height="30"  style={{color: "#f40000"}} />
       </button>
   )}
   />
