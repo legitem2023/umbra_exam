@@ -128,7 +128,7 @@ const Dropdown: React.FC<DropdownProps> = ({ tag, id }) => {
             <li
               key={option}
               onClick={() => handleSelect(option)}
-              className="p-3 cursor-pointer hover:bg-gray-100"
+              className="text-sm p-2 cursor-pointer hover:bg-gray-100"
             >
               {option}
             </li>
