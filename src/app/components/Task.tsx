@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react/dist/iconify.js';
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import Done from './Stages/Done';
-import ThreeDotMenu './UI/ThreeDotMenu';
+import ThreeDotMenu from './UI/ThreeDotMenu';
 import { TaskProps } from '../Types/types';
 import Dropdown from './UI/Dropdown';
 
