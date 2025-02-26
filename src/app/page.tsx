@@ -41,7 +41,7 @@ const Home: React.FC = () => {
     <Nav/>
     <div className="p-2">
       <h1 className="text-2xl font-bold mb-4 bg-gray-400 text-white p-2">Task Manager</h1>
-      <div className="mb-4 w-full box-content flex p-2">
+      <div className="mb-4 w-full box-content flex flex-col p-2">
         <input
           type="text"
           placeholder="Task title"
