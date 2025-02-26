@@ -47,23 +47,23 @@ const Home: React.FC = () => {
           placeholder="Task title"
           value={newTask.title}
           onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-          className="border p-2 m-1 w-full"
+          className="border p-2 m-1 w-[90%]"
         />
         <input
           type="text"
           placeholder="Description"
           value={newTask.description}
           onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-          className="border p-2 m-1 w-full"
+          className="border p-2 m-1 w-[90%]"
         />
         <input
           type="date"
           placeholder="Date"
           defaultValue={newTask.dueDate}
           onChange={(e) => setNewTask({ ...newTask, dueDate: new Date(e.target.value).toDateString() })}
-          className="border p-2 m-1 w-[50%]"
+          className="border p-2 m-1 w-[40%]"
         />
-        <button onClick={handleAddTask} className="bg-blue-500 border text-white p-2 m-1 w-[50%] rounded-3">
+        <button onClick={handleAddTask} className="bg-blue-500 border text-white p-2 m-1 w-[40%] rounded-3">
           Add Task
         </button>
       </div>
