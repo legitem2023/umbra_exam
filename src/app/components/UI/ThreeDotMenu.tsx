@@ -1,9 +1,9 @@
-import React,{ useRef,useState,ReactNode,ReactElement,FC} from "react";
+import React,{ useRef,useEffect,useState,ReactNode,ReactElement,FC} from "react";
 import {ThreeDotProps} from '../../Types/types';
 
 const ThreeDotMenu:FC<ThreeDotProps> = ({child1,child2}) => {
   const [isOpen, setIsOpen] = useState(false);
- const dropdownRef = useRef();
+ const dropdownRef = useRef<HTMLDivElement>(null);
   // Handle click outside dropdown
   const handleClickOutside = useCallback((event: MouseEvent) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
