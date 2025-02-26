@@ -33,7 +33,7 @@ const Home: React.FC = () => {
         id: Date.now().toString(),
       })
     );
-    setNewTask({ title: '', description: '', columnId: 'todo', tags: [], dueDate: '',createdAt: new Date().toDateString() });
+    setNewTask({ title: '', description: '', columnId: 'todo', tags: [], dueDate:new Date().toDateString() ,createdAt: new Date().toDateString() });
   };
 
   return (
