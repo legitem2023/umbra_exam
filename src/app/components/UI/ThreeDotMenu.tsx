@@ -29,10 +29,10 @@ const ThreeDotMenu:FC<ThreeDotProps> = ({child1,child2}) => {
       {isOpen && (
         <div className="absolute right-0 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
           <ul className="py-1">
-            <li className="p-2">
+            <li className="p-1 flex flex-col">
               {child1()}
             </li>
-            <li className="p-2">
+            <li className="p-1 flex flex-col">
               {child2()}
             </li>
           </ul>
