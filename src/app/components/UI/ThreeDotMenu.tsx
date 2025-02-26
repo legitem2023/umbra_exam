@@ -1,8 +1,8 @@
 import { useState ,ReactElement} from "react";
 
 type ThreeDotprops = {
-  edit:()=>ReactElement,
-  delete:()=>ReactElement
+  child1:()=>ReactElement,
+  child2:()=>ReactElement
 }
 const ThreeDotMenu = ({edit,delete}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,10 +22,10 @@ const ThreeDotMenu = ({edit,delete}) => {
         <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
           <ul className="py-1">
             <li>
-              {edit}
+              {child1}
             </li>
             <li>
-              {delete}
+              {child2}
             </li>
           </ul>
         </div>
