@@ -1,5 +1,5 @@
 import React,{ useState,ReactNode,ReactElement,FC} from "react";
-import {ThreeDotProps} from '../Types/types';
+import {ThreeDotProps} from '../../Types/types';
 
 const ThreeDotMenu:FC<ThreeDotProps> = ({child1,child2}) => {
   const [isOpen, setIsOpen] = useState(false);
