@@ -15,9 +15,9 @@
 }
 
 body {
-  color: var(--foreground);
+  color: '#000000';
   background: var(--background);
-  background-color: #aad3ff;
+  background-color: '#aad3ff';
   font-family: Arial, Helvetica, sans-serif;
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#1e5799+0,2989d8+50,207cca+89,207cca+89,7db9e8+100 */
 }
