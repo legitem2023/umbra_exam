@@ -66,7 +66,7 @@ const Task: React.FC<TaskProps> = ({
           {description && <p className="text-sm min-h-[100px]">{description}</p>}
 
         
-            <div className="flex items-center mt-2 mb-2">
+            <div className="flex items-center mt-4 mb-4">
             <p className="text-sm">Tags:</p>
 
               <Dropdown tag={tags} id={id}/>
