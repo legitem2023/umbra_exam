@@ -9,7 +9,7 @@ const ThreeDotMenu:FC<ThreeDotProps> = ({child1,child2}) => {
       {/* Three Dots Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 rounded-full hover:bg-gray-200 focus:outline-none"
+        className="p-2 rounded-full hover:bg-gray-200 focus:outline-none h-[30px] w-[30px]"
       >
         <span className="text-xl">⋮</span>
       </button>
@@ -18,10 +18,10 @@ const ThreeDotMenu:FC<ThreeDotProps> = ({child1,child2}) => {
       {isOpen && (
         <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
           <ul className="py-1">
-            <li>
+            <li className="p-5">
               {child1()}
             </li>
-            <li>
+            <li className="p-5>
               {child2()}
             </li>
           </ul>
