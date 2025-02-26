@@ -32,7 +32,7 @@ const ThreeDotMenu:FC<ThreeDotProps> = ({child1,child2}) => {
             <li className="p-1 flex flex-col">
               {child1()}
             </li>
-            <li className="p-1 flex flex-col">
+            <li className="p-1 flex flex-col item-center">
               {child2()}
             </li>
           </ul>
