@@ -116,14 +116,14 @@ const Dropdown: React.FC<DropdownProps> = ({ tag, id }) => {
     <div className="relative w-60" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full text-left bg-white shadow-sm flex justify-between items-center p-2 border rounded"
+        className="text-sm w-full text-left bg-white shadow-sm flex justify-between items-center p-2 border rounded"
       >
         {selectedOption}
         <span className="text-gray-500">&#9662;</span>
       </button>
 
       {isOpen && (
-        <ul className="absolute left-0 mt-2 w-full bg-white border rounded-lg shadow-lg z-10">
+        <ul className="absolute left-0 w-full bg-white border rounded-lg shadow-lg z-10">
           {options.map((option) => (
             <li
               key={option}
