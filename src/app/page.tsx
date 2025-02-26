@@ -41,20 +41,20 @@ const Home: React.FC = () => {
     <Nav/>
     <div className="p-2">
       <h1 className="text-2xl font-bold mb-4 bg-gray-400 text-white p-2">Task Manager</h1>
-      <div className="mb-4">
+      <div className="mb-4 w-full">
         <input
           type="text"
           placeholder="Task title"
           value={newTask.title}
           onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-          className="border p-2 m-1 w-[90%]"
+          className="border p-2 m-1 w-[100%]"
         />
         <input
           type="text"
           placeholder="Description"
           value={newTask.description}
           onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-          className="border p-2 m-1 w-[90%]"
+          className="border p-2 m-1 w-[100%]"
         />
         <input
           type="date"
