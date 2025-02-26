@@ -140,25 +140,25 @@ useEffect(() => {
           <div className="flex space-x-4 mb-4">
             <button
               onClick={() => setSortCriteria('title')}
-              className={`p-1 ${sortCriteria === 'title' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+              className={`p-1 text-xs ${sortCriteria === 'title' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
             >
               Sort by Title
             </button>
             <button
               onClick={() => setSortCriteria('dueDate')}
-              className={`p-1 text-sm ${sortCriteria === 'dueDate' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+              className={`p-1 text-xs ${sortCriteria === 'dueDate' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
             >
               Sort by Due Date
             </button>
             <button
               onClick={() => setSortCriteria('createdAt')}
-              className={`p-1 text-sm ${sortCriteria === 'createdAt' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+              className={`p-1 text-xs ${sortCriteria === 'createdAt' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
             >
               Sort by Creation Time
             </button>
           <button
               onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-              className="p-1 text-sm bg-green-500 text-white"
+              className="p-1 text-xs bg-green-500 text-white"
             >
               {sortOrder === 'asc' ? (<Icon icon="cuida:sort-ascending-duotone" width="24" height="25" />) : (<Icon icon="cuida:sort-descending-duotone" width="24" height="25" />) }
             </button>
