@@ -1,10 +1,10 @@
-import { useState,ReactNode,ReactElement,FC} from "react";
+import React,{ useState,ReactNode,ReactElement,FC} from "react";
 
-type ThreeDotprops = {
-  child1:()=>ReactNode,
-  child2:()=>ReactNode
-}
-const ThreeDotMenu:FC<ThreeDotprops> = ({child1,child2}) => {
+type ThreeDotProps = {
+  child1: React.ReactNode | (() => React.ReactNode);
+  child2: React.ReactNode | (() => React.ReactNode);
+};
+const ThreeDotMenu:FC<ThreeDotProps> = ({child1,child2}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
