@@ -1,8 +1,8 @@
 import { useState ,ReactElement,FC} from "react";
 
 type ThreeDotprops = {
-  child1:()=>ReactElement,
-  child2:()=>ReactElement
+  child1:()=>ReactNode,
+  child2:()=>ReactNode
 }
 const ThreeDotMenu:FC<ThreeDotprops> = ({child1,child2}) => {
   const [isOpen, setIsOpen] = useState(false);
