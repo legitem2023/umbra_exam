@@ -4,7 +4,7 @@ type ThreeDotprops = {
   child1:()=>ReactElement,
   child2:()=>ReactElement
 }
-const ThreeDotMenu = ({edit,delete}) => {
+const ThreeDotMenu = ({child1,child2}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
