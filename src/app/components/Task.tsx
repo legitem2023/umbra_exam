@@ -49,7 +49,18 @@ const Task: React.FC<TaskProps> = ({
         >
           {columns==='Done'?(<Done/>):(<></>)}
 <div className="absolute top-0 right-0 m-4">
-<ThreeDotMenu/>
+<ThreeDotMenu 
+  edit={()=>(
+        <button onClick={onEdit} className="text-blue-500 hover:text-blue-700">
+            <Icon icon="tabler:edit" width="24" height="24"  style={{color: "#f49f00"}} />
+        </button> 
+  )}
+  delete={()=>(
+      <button onClick={onDelete} className="text-red-500 hover:text-red-700">
+            <Icon icon="ph-trash-fill" width="24" height="24"  style={{color: "#f40000"}} />
+      </button>
+  )}
+  />
 </div>
           <h3 className="font-semibold">{title}</h3>
           {description && <p className="text-sm min-h-[100px]">{description}</p>}
@@ -95,14 +106,7 @@ const Task: React.FC<TaskProps> = ({
           </>):(<></>)}
           </div>
         {/* */}
-        <div className="flex justify-end">
-            <button onClick={onEdit} className="text-blue-500 hover:text-blue-700">
-            <Icon icon="tabler:edit" width="24" height="24"  style={{color: "#f49f00"}} />
-            </button>
-            <button onClick={onDelete} className="text-red-500 hover:text-red-700">
-            <Icon icon="ph-trash-fill" width="24" height="24"  style={{color: "#f40000"}} />
-            </button>
-          </div>
+
         </div>
       )}
     </Draggable>
