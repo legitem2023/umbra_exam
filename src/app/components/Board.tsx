@@ -133,11 +133,11 @@ useEffect(() => {
             placeholder="Search tasks..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="border p-2 mb-4 w-full"
+            className="border p-2 mb-2 w-full"
           />
 
           {/* Sort Options */}
-          <div className="flex space-x-4 mb-4">
+          <div className="flex space-x-2 mb-2">
             <button
               onClick={() => setSortCriteria('title')}
               className={`p-1 text-xs ${sortCriteria === 'title' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
