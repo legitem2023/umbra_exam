@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+type ThreeDotprops = {
+  edit:()=>void,
+  delete:()=>void
+}
 const ThreeDotMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
