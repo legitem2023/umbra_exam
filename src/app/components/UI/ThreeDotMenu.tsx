@@ -9,7 +9,7 @@ const ThreeDotMenu:FC<ThreeDotProps> = ({child1,child2}) => {
       {/* Three Dots Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 rounded-full hover:bg-gray-200 focus:outline-none">
+        className=" h-[30px] w-[30px] p-2 rounded-full hover:bg-gray-200 focus:outline-none">
         <span className="text-xl">⋮</span>
       </button>
 
@@ -20,7 +20,7 @@ const ThreeDotMenu:FC<ThreeDotProps> = ({child1,child2}) => {
             <li className="p-5">
               {child1()}
             </li>
-            <li className="p-5>
+            <li className="p-5">
               {child2()}
             </li>
           </ul>
