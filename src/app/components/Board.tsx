@@ -156,11 +156,11 @@ useEffect(() => {
             >
               Sort by Creation Time
             </button>
-            <button
+          <button
               onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
               className="p-1 bg-green-500 text-white"
             >
-              {sortOrder === 'asc' ? 'Ascending' : 'Descending'}
+              {sortOrder === 'asc' ? (<Icon icon="cuida:sort-ascending-duotone" width="24" height="25" />) : (<Icon icon="cuida:sort-descending-duotone" width="24" height="25" />) }
             </button>
           </div>
 
