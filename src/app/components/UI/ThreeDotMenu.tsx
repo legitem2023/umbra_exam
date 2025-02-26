@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState ,ReactElement} from "react";
 
 type ThreeDotprops = {
-  edit:()=>void,
-  delete:()=>void
+  edit:()=>ReactElement,
+  delete:()=>ReactElement
 }
-const ThreeDotMenu = () => {
+const ThreeDotMenu = ({edit,delete}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -22,19 +22,10 @@ const ThreeDotMenu = () => {
         <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
           <ul className="py-1">
             <li>
-              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                Option 1
-              </button>
+              {edit}
             </li>
             <li>
-              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                Option 2
-              </button>
-            </li>
-            <li>
-              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                Option 3
-              </button>
+              {delete}
             </li>
           </ul>
         </div>
