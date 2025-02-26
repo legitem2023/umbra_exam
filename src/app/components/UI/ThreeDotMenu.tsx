@@ -17,10 +17,10 @@ const ThreeDotMenu:FC<ThreeDotProps> = ({child1,child2}) => {
       {isOpen && (
         <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
           <ul className="py-1">
-            <li className="p-5">
+            <li className="p-2">
               {child1()}
             </li>
-            <li className="p-5">
+            <li className="p-2">
               {child2()}
             </li>
           </ul>
