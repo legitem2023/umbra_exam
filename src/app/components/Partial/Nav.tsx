@@ -3,7 +3,7 @@ import React from 'react'
 
 const Nav = () => {
   return (
-    <div className='Nav bg-blue-500 p-5'>
+    <div className='Nav bg-blue-500 p-3'>
         <Image src='https://www.umbradigitalcompany.com/images/general/logo-white.svg' height={60} width={60} alt='1'/>
     </div>
   )
