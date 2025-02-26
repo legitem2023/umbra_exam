@@ -1,4 +1,4 @@
-import { useState ,ReactElement,FC} from "react";
+import { useState,ReactNode,ReactElement,FC} from "react";
 
 type ThreeDotprops = {
   child1:()=>ReactNode,
