@@ -142,19 +142,19 @@ useEffect(() => {
               onClick={() => setSortCriteria('title')}
               className={`p-1 text-xs ${sortCriteria === 'title' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
             >
-              Sort by Title
+              Sort Title
             </button>
             <button
               onClick={() => setSortCriteria('dueDate')}
               className={`p-1 text-xs ${sortCriteria === 'dueDate' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
             >
-              Sort by Due Date
+              Sort Due Date
             </button>
             <button
               onClick={() => setSortCriteria('createdAt')}
               className={`p-1 text-xs ${sortCriteria === 'createdAt' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
             >
-              Sort by Creation Time
+              Sort Created Date
             </button>
           <button
               onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
