@@ -1,5 +1,11 @@
 import { ReactComponentElement, ReactElement, ReactNode } from "react"
 
+export type ThreeDotProps = {
+  child1:() => ReactElement,
+  child2:() => ReactElement,
+};
+
+
 export type Task = {
     id: string;
     title: string;
