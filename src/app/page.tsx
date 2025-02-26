@@ -61,9 +61,9 @@ const Home: React.FC = () => {
           placeholder="Date"
           defaultValue={newTask.dueDate}
           onChange={(e) => setNewTask({ ...newTask, dueDate: new Date(e.target.value).toDateString() })}
-          className="border p-2 mb-3 w-[45%]"
+          className="border p-2 mb-3 w-[50%]"
         />
-        <button onClick={handleAddTask} className="bg-blue-500 border text-white p-2 mb-3 w-[45%] rounded-3">
+        <button onClick={handleAddTask} className="bg-blue-500 border text-white p-2 w-[50%] rounded-3">
           Add Task
         </button>
       </div>
