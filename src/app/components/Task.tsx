@@ -63,7 +63,7 @@ const Task: React.FC<TaskProps> = ({
   />
 </div>
           <h3 className="font-semibold">{title}</h3>
-          {description && <p className="text-sm min-h-[100px]">{description}</p>}
+          {description && <p className="text-sm min-h-[150px]">{description}</p>}
 
         
             <div className="flex items-center mt-4 mb-4">
