@@ -50,17 +50,17 @@ const Task: React.FC<TaskProps> = ({
           {columns==='Done'?(<Done/>):(<></>)}
 
           <h3 className="font-semibold">{title}</h3>
-          {description && <p className="text-md min-h-[100px]">{description}</p>}
+          {description && <p className="text-sm min-h-[100px]">{description}</p>}
 
         
             <div className="flex items-center">
-            <p className="text-md">Tags:</p>
+            <p className="text-sm">Tags:</p>
 
               <Dropdown tag={tags} id={id}/>
             </div>
             <div className="flex flex-col absolute left-0 bottom-0 m-4 ">
-                <p className="text-md">Created Date: {createdAt}</p>
-                <p className="text-md">Due Date: {dueDate}</p>
+                <p className="text-sm">Created Date: {createdAt}</p>
+                <p className="text-sm">Due Date: {dueDate}</p>
             </div>
         {/* */}
         <div>
