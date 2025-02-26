@@ -47,14 +47,14 @@ const Home: React.FC = () => {
           placeholder="Task title"
           value={newTask.title}
           onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-          className="border p-2 m-1 w-[100%]"
+          className="border box-content p-2 m-1 w-[100%] "
         />
         <input
           type="text"
           placeholder="Description"
           value={newTask.description}
           onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-          className="border p-2 m-1 w-[100%]"
+          className="border box-content p-2 m-1 w-[100%]"
         />
         <input
           type="date"
