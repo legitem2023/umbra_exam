@@ -22,6 +22,9 @@ const Board: React.FC = () => {
   const handleTaskMove = (result: DropResult) => {
     const { source, destination } = result;
     if (!destination) return;
+    if(destination.droppableId==='done'){
+      showToast("Task moved to Done","success");
+    }
     dispatch(moveTask({ source, destination }));
   };
 
