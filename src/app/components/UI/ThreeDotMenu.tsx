@@ -21,15 +21,15 @@ const ThreeDotMenu:FC<ThreeDotProps> = ({child1,child2}) => {
       {/* Three Dots Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 rounded-full hover:bg-gray-200 focus:outline-none">
+        className="p-0 rounded-full w-[30px] border h-[30px] bg-gray-100 hover:bg-gray-200 focus:outline-none">
         <span className="text-xl">⋮</span>
       </button>
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
+        <div className="absolute right-0 w-[auto] bg-white border border-gray-200 rounded-md shadow-lg">
           <ul className="py-1">
-            <li className="p-1 flex flex-col items-center justify-centef">
+            <li className="p-1 flex flex-col items-center justify-center">
               {child1()}
             </li>
             <li className="p-1 flex flex-col items-center justify-center">

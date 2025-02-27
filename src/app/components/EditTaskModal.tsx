@@ -17,7 +17,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ task, onSave, onClose }) 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg w-96">
+      <div className="w-[95%] md:w-[40%] bg-white p-6 rounded-lg">
         <h2 className="text-xl font-bold mb-4">Edit Task</h2>
         Task Title
         <input
@@ -41,10 +41,10 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ task, onSave, onClose }) 
           className="border p-2 w-full mb-4"
         />
         <div className="flex justify-end">
-          <button onClick={onClose} className="bg-gray-500 text-white p-2 mr-2">
+          <button onClick={onClose} className="bg-gray-500 text-white p-2 mr-2 w-[100px] rounded">
             Cancel
           </button>
-          <button onClick={handleSave} className="bg-blue-500 text-white p-2">
+          <button onClick={handleSave} className="bg-blue-500 text-white p-2 w-[100px] rounded">
             Save
           </button>
         </div>

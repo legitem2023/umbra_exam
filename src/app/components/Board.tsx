@@ -126,33 +126,33 @@ useEffect(() => {
   return (
     <>
       <DragDropContext onDragEnd={handleTaskMove}>
-        <div className="p-1">
+        <div className="p-0">
           {/* Search Input */}
           <input
             type="text"
-            placeholder="Search tasks..."
+            placeholder="Search Tasks..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="border p-2 mb-2 w-full"
+            className="w-full md:w-1/2 border p-2 mb-2"
           />
 
           {/* Sort Options */}
-          <div className="flex space-x-2 mb-2">
+          <div className="flex space-x-2 mb-2 overflow-x">
             <button
               onClick={() => setSortCriteria('title')}
-              className={`p-1 text-xs ${sortCriteria === 'title' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+              className={`p-1 text-sm ${sortCriteria === 'title' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
             >
               Sort Title
             </button>
             <button
               onClick={() => setSortCriteria('dueDate')}
-              className={`p-1 text-xs ${sortCriteria === 'dueDate' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+              className={`p-1 text-sm ${sortCriteria === 'dueDate' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
             >
               Sort Due Date
             </button>
             <button
               onClick={() => setSortCriteria('createdAt')}
-              className={`p-1 text-xs ${sortCriteria === 'createdAt' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+              className={`p-1 text-sm ${sortCriteria === 'createdAt' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
             >
               Sort Created Date
             </button>
