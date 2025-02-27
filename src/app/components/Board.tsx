@@ -9,6 +9,7 @@ import EditTaskModal from './EditTaskModal';
 import { Task } from '../Types/types';
 import Loading from './UI/Loading';
 import { Icon } from '@iconify/react/dist/iconify.js';
+import { showToast } from '../Utils/Script';
 const Board: React.FC = () => {
   const dispatch = useDispatch();
   const columns = useSelector((state: RootState) => state.tasks.columns);
@@ -21,7 +22,6 @@ const Board: React.FC = () => {
   const handleTaskMove = (result: DropResult) => {
     const { source, destination } = result;
     if (!destination) return;
-
     dispatch(moveTask({ source, destination }));
   };
 
@@ -60,7 +60,7 @@ const Board: React.FC = () => {
   const handleMoveTask = (taskId: string, direction: 'left' | 'right') => {
     const task = columns.flatMap((col) => col.tasks).find((t) => t.id === taskId);
     if (!task) return;
-
+    
     const currentColumnIndex = columns.findIndex((col) => col.tasks.some((t) => t.id === taskId));
     const targetColumnIndex = direction === 'left' ? currentColumnIndex - 1 : currentColumnIndex + 1;
 
@@ -68,7 +68,9 @@ const Board: React.FC = () => {
 
     const sourceColumn = columns[currentColumnIndex];
     const destColumn = columns[targetColumnIndex];
-
+    if(destColumn.id==='done'){
+      showToast("Task moved to Done","success");
+    }
     dispatch(
       moveTask({
         source: {
