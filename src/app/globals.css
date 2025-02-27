@@ -17,7 +17,7 @@
 body {
   color: '#000000';
   background: var(--background);
-  background-color: '#aad3ff';
+  /*background-color: '#aad3ff';*/
   font-family: Arial, Helvetica, sans-serif;
   /* filter: invert(1) hue-rotate(180deg); */
 
