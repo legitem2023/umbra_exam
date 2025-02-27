@@ -29,9 +29,9 @@ const Task: React.FC<TaskProps> = ({
     const diffInDays = diffInTime / (1000 * 3600 * 24);
 
     if (diffInDays > 1) {
-      return 'bg-red-300';
+      return 'bg-[#fcbdbe]';
     } else if (diffInDays >= 0 && diffInDays < 2) {
-      return 'bg-yellow-200';
+      return 'bg-[#ede19f]';
     } else {
       return 'bg-white-100';
     }
