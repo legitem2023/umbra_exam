@@ -22,7 +22,7 @@ const FuturisticPortfolio = () => {
     };
   }, []);
 
-  const handleTabChange = (tab) => {
+  const handleTabChange = (tab:any) => {
     if (tab === activeTab || isAnimating) return;
     
     setIsAnimating(true);
@@ -81,7 +81,7 @@ const FuturisticPortfolio = () => {
   ];
 
   // Animation classes based on direction
-  const getAnimationClass = (tab) => {
+  const getAnimationClass = (tab:any) => {
     if (tab !== activeTab) return 'hidden';
     
     if (direction === 'right') {
