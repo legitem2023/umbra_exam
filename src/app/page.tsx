@@ -101,7 +101,7 @@ const FuturisticPortfolio = () => {
 
         {/* Mobile Nav */}
         {mobileMenuOpen && (
-          <div className="md:hidden px-4 pb-4 space-y-2 bg-black bg-opacity-90 border-t border-gray-800">
+          <div className="px-4 pb-4 space-y-2 bg-black bg-opacity-90 border-t border-gray-800">
             {['home', 'skills', 'projects', 'contact'].map((tab) => (
               <button
                 key={tab}
