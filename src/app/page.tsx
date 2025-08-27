@@ -10,11 +10,9 @@ export default function page() {
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-emerald-800 to-purple-800 rounded-full filter blur-3xl opacity-20 animate-pulse-slower"></div>
         <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-gradient-to-r from-emerald-700 to-purple-700 rounded-full filter blur-3xl opacity-15 animate-pulse-medium"></div>
         <div className="absolute bottom-1/4 left-1/3 w-60 h-60 bg-gradient-to-r from-purple-900 to-emerald-800 rounded-full filter blur-3xl opacity-15 animate-pulse-slow"></div>
-      </div>
-      
+      </div> 
       {/* Grid Overlay */}
-      <div className="fixed inset-0 z-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PHBhdGggZD0iTTAgMEg1MFY1MEgwWiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=')]"></div>
-      
+      <div className="fixed inset-0 z-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PHBhdGggZD0iTTAgMEg1MFY1MEgwWiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=')]"></div>  
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/30 border-b border-emerald-500/10 py-6 px-8 flex justify-between items-center">
         <div className="text-2xl font-bold tracking-wider">
