@@ -139,11 +139,7 @@ const FuturisticPortfolio = () => {
                   user interfaces. 
                 </p>
 
-                <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6">
-                  I graduated with a <span className="font-semibold text-white">BSIT from ICCT Colleges in 2018</span>. 
-                  Since then, I’ve committed to growing in web development and innovation. I’m currently freelancing, 
-                  after successfully completing multiple web-based projects for my previous employer (Aug 2024).
-                </p>
+  
 
                 <div className="flex flex-wrap gap-4">
                   <button className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-purple-500 rounded-lg font-medium text-sm sm:text-base">
