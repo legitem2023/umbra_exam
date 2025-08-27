@@ -186,7 +186,7 @@ const FuturisticPortfolio = () => {
       <header className="relative z-10 border-b border-gray-800 bg-black bg-opacity-70 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent animate-fade-in">
-            DEV<span className="text-white">X</span>
+            DEV<span className="text-white">R</span>
           </h1>
 
           {/* Desktop Nav */}
@@ -280,7 +280,7 @@ const FuturisticPortfolio = () => {
                     <div className="absolute inset-0 rounded-full border-2 border-purple-500/30 animate-ping"></div>
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
-                        DEV X
+                        DEV R
                       </div>
                     </div>
                   </div>
