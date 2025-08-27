@@ -3,10 +3,11 @@
 
 import { useState } from 'react';
 
-const page = () => {
+const FuturisticPortfolio = () => {
   const [activeTab, setActiveTab] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Sample data
+  // Skills Data
   const skills = [
     { name: 'React/Next.js', level: 95 },
     { name: 'Node.js', level: 90 },
@@ -16,6 +17,7 @@ const page = () => {
     { name: 'AWS', level: 75 },
   ];
 
+  // Projects Data
   const projects = [
     {
       title: 'E-Commerce Platform',
@@ -41,7 +43,7 @@ const page = () => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* Animated background elements */}
+      {/* Background Animation */}
       <div className="fixed inset-0 z-0 opacity-20">
         {[...Array(10)].map((_, i) => (
           <div
@@ -59,16 +61,14 @@ const page = () => {
         ))}
       </div>
 
-      {/* Header/Navigation */}
+      {/* Header */}
       <header className="relative z-10 border-b border-gray-800 bg-black bg-opacity-70 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
-              DEV<span className="text-white">X</span>
-            </h1>
-          </div>
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
+            DEV<span className="text-white">X</span>
+          </h1>
 
+          {/* Desktop Nav */}
           <nav className="hidden md:flex space-x-8">
             {['home', 'skills', 'projects', 'contact'].map((tab) => (
               <button
@@ -86,55 +86,91 @@ const page = () => {
             ))}
           </nav>
 
-          <button className="px-6 py-2 bg-gradient-to-r from-emerald-500 to-purple-500 rounded-full font-medium hover:opacity-90 transition-opacity">
-            Contact Me
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-gray-400 hover:text-white"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? (
+              <i className="fas fa-times text-xl"></i>
+            ) : (
+              <i className="fas fa-bars text-xl"></i>
+            )}
           </button>
         </div>
+
+        {/* Mobile Nav */}
+        {mobileMenuOpen && (
+          <div className="md:hidden px-4 pb-4 space-y-2 bg-black bg-opacity-90 border-t border-gray-800">
+            {['home', 'skills', 'projects', 'contact'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => {
+                  setActiveTab(tab);
+                  setMobileMenuOpen(false);
+                }}
+                className={`block w-full text-left py-2 text-sm uppercase font-medium ${
+                  activeTab === tab ? 'text-emerald-400' : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        )}
       </header>
 
+      {/* Main Content */}
       <main className="relative z-10 container mx-auto px-4 py-12">
-        {/* Hero Section */}
+        {/* Home Section */}
         {activeTab === 'home' && (
           <section className="mb-20">
             <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Intro */}
               <div>
-                <h2 className="text-5xl md:text-6xl font-bold mb-6">
-                  Full-Stack
-                  <span className="block bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
-                    Web Developer
-                  </span>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                  Hi, I’m <span className="text-emerald-400">Robert Marquez</span>
                 </h2>
-                
-                <p className="text-gray-300 text-lg mb-8">
-                  Creating cutting-edge digital experiences with modern technologies. 
-                  Specialized in responsive design, performance optimization, and scalable architecture.
+
+                <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6">
+                  I’m a passionate <span className="font-semibold text-white">Full Stack Web Developer</span> 
+                  with a knack for crafting elegant and efficient digital solutions. With over 5 years of 
+                  experience, I thrive on bringing ideas to life through clean, maintainable code and intuitive 
+                  user interfaces. 
                 </p>
-                
-                <div className="flex space-x-4">
-                  <button className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-purple-500 rounded-lg font-medium">
+
+                <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6">
+                  I graduated with a <span className="font-semibold text-white">BSIT from ICCT Colleges in 2018</span>. 
+                  Since then, I’ve committed to growing in web development and innovation. I’m currently freelancing, 
+                  after successfully completing multiple web-based projects for my previous employer (Aug 2024).
+                </p>
+
+                <div className="flex flex-wrap gap-4">
+                  <button className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-purple-500 rounded-lg font-medium text-sm sm:text-base">
                     View Projects
                   </button>
-                  <button className="px-6 py-3 border border-gray-700 rounded-lg font-medium hover:border-emerald-500 transition-colors">
+                  <button className="px-6 py-3 border border-gray-700 rounded-lg font-medium text-sm sm:text-base hover:border-emerald-500 transition-colors">
                     Download CV
                   </button>
                 </div>
               </div>
-              
-              <div className="relative">
-                <div className="aspect-square rounded-full bg-gradient-to-br from-emerald-500/10 to-purple-500/10 p-12 flex items-center justify-center">
+
+              {/* Visual */}
+              <div className="relative flex justify-center md:justify-end">
+                <div className="aspect-square w-64 sm:w-80 md:w-96 rounded-full bg-gradient-to-br from-emerald-500/10 to-purple-500/10 p-12 flex items-center justify-center">
                   <div className="w-full h-full rounded-full border-2 border-emerald-500/30 relative">
                     <div className="absolute inset-0 rounded-full border-2 border-purple-500/30 animate-ping"></div>
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
+                      <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
                         DEV X
                       </div>
                     </div>
                   </div>
                 </div>
-                
-                {/* Floating elements */}
-                <div className="absolute -top-4 -left-4 w-24 h-24 rounded-lg border border-emerald-500/30 animate-pulse"></div>
-                <div className="absolute -bottom-4 -right-4 w-16 h-16 rounded-lg border border-purple-500/30 animate-pulse"></div>
+
+                {/* Floating accents */}
+                <div className="absolute -top-4 -left-4 w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 rounded-lg border border-emerald-500/30 animate-pulse"></div>
+                <div className="absolute -bottom-4 -right-4 w-12 sm:w-14 md:w-16 h-12 sm:h-14 md:h-16 rounded-lg border border-purple-500/30 animate-pulse"></div>
               </div>
             </div>
           </section>
@@ -143,25 +179,25 @@ const page = () => {
         {/* Skills Section */}
         {activeTab === 'skills' && (
           <section className="mb-20">
-            <h2 className="text-4xl font-bold mb-12 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center">
               <span className="bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
                 Technical Skills
               </span>
             </h2>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              {skills.map((skill, index) => (
+
+            <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
+              {skills.map((skill) => (
                 <div
                   key={skill.name}
                   className="bg-gray-900 bg-opacity-50 rounded-xl p-6 border border-gray-800"
                 >
-                  <div className="flex justify-between mb-2">
+                  <div className="flex justify-between mb-2 text-sm sm:text-base">
                     <span className="font-medium">{skill.name}</span>
                     <span className="text-emerald-400">{skill.level}%</span>
                   </div>
                   <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-emerald-500 to-purple-500 transition-all duration-1000"
+                      className="h-full bg-gradient-to-r from-emerald-500 to-purple-500"
                       style={{ width: `${skill.level}%` }}
                     ></div>
                   </div>
@@ -174,12 +210,12 @@ const page = () => {
         {/* Projects Section */}
         {activeTab === 'projects' && (
           <section className="mb-20">
-            <h2 className="text-4xl font-bold mb-12 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center">
               <span className="bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
                 Featured Projects
               </span>
             </h2>
-            
+
             <div className="grid md:grid-cols-2 gap-8">
               {projects.map((project, index) => (
                 <div
@@ -212,16 +248,16 @@ const page = () => {
         {/* Contact Section */}
         {activeTab === 'contact' && (
           <section className="mb-20">
-            <h2 className="text-4xl font-bold mb-12 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center">
               <span className="bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
                 Get In Touch
               </span>
             </h2>
-            
+
             <div className="grid md:grid-cols-2 gap-12">
+              {/* Contact Info */}
               <div>
                 <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
-                
                 <div className="space-y-4">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 rounded-full bg-emerald-900/30 flex items-center justify-center">
@@ -232,7 +268,6 @@ const page = () => {
                       <p>contact@devx.example</p>
                     </div>
                   </div>
-                  
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 rounded-full bg-purple-900/30 flex items-center justify-center">
                       <i className="fas fa-phone text-purple-400"></i>
@@ -242,7 +277,6 @@ const page = () => {
                       <p>+1 (555) 123-4567</p>
                     </div>
                   </div>
-                  
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 rounded-full bg-emerald-900/30 flex items-center justify-center">
                       <i className="fas fa-map-marker-alt text-emerald-400"></i>
@@ -253,7 +287,6 @@ const page = () => {
                     </div>
                   </div>
                 </div>
-                
                 <div className="mt-8">
                   <h4 className="text-xl font-bold mb-4">Follow Me</h4>
                   <div className="flex space-x-4">
@@ -269,10 +302,10 @@ const page = () => {
                   </div>
                 </div>
               </div>
-              
+
+              {/* Contact Form */}
               <div className="bg-gray-900 bg-opacity-50 rounded-xl p-8 border border-gray-800">
                 <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
-                
                 <form className="space-y-6">
                   <div>
                     <label className="block text-gray-400 mb-2">Name</label>
@@ -281,7 +314,6 @@ const page = () => {
                       className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 transition-colors"
                     />
                   </div>
-                  
                   <div>
                     <label className="block text-gray-400 mb-2">Email</label>
                     <input
@@ -289,7 +321,6 @@ const page = () => {
                       className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 transition-colors"
                     />
                   </div>
-                  
                   <div>
                     <label className="block text-gray-400 mb-2">Message</label>
                     <textarea
@@ -297,7 +328,6 @@ const page = () => {
                       className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 transition-colors"
                     ></textarea>
                   </div>
-                  
                   <button
                     type="submit"
                     className="w-full px-6 py-3 bg-gradient-to-r from-emerald-500 to-purple-500 rounded-lg font-medium hover:opacity-90 transition-opacity"
@@ -311,8 +341,9 @@ const page = () => {
         )}
       </main>
 
+      {/* Footer */}
       <footer className="relative z-10 border-t border-gray-800 bg-black bg-opacity-70 backdrop-blur-md py-8">
-        <div className="container mx-auto px-4 text-center text-gray-400">
+        <div className="container mx-auto px-4 text-center text-gray-400 text-sm">
           <p>© {new Date().getFullYear()} DevX Portfolio. All rights reserved.</p>
         </div>
       </footer>
@@ -320,4 +351,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default FuturisticPortfolio;
