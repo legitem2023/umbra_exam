@@ -1,210 +1,323 @@
-// app/page.js
-'use client'
-import React from 'react';
+// components/FuturisticPortfolio.jsx
+'use client';
 
-export default function page() {
+import { useState } from 'react';
+
+const page = () => {
+  const [activeTab, setActiveTab] = useState('home');
+
+  // Sample data
+  const skills = [
+    { name: 'React/Next.js', level: 95 },
+    { name: 'Node.js', level: 90 },
+    { name: 'TypeScript', level: 85 },
+    { name: 'MongoDB', level: 80 },
+    { name: 'CSS/Tailwind', level: 95 },
+    { name: 'AWS', level: 75 },
+  ];
+
+  const projects = [
+    {
+      title: 'E-Commerce Platform',
+      description: 'Full-stack e-commerce solution with payment integration',
+      tags: ['Next.js', 'Stripe', 'MongoDB'],
+    },
+    {
+      title: 'AI Content Generator',
+      description: 'AI-powered content creation tool with GPT integration',
+      tags: ['React', 'OpenAI', 'Node.js'],
+    },
+    {
+      title: 'Crypto Dashboard',
+      description: 'Real-time cryptocurrency tracking dashboard',
+      tags: ['Next.js', 'WebSocket', 'Chart.js'],
+    },
+    {
+      title: 'Task Management App',
+      description: 'Productivity app with team collaboration features',
+      tags: ['React', 'Firebase', 'Material UI'],
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white overflow-hidden relative">
-      {/* Background Elements */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute top-10 left-10 w-64 h-64 bg-gradient-to-r from-emerald-900 to-purple-900 rounded-full filter blur-3xl opacity-30 animate-pulse-slow"></div>
-        <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-emerald-800 to-purple-800 rounded-full filter blur-3xl opacity-20 animate-pulse-slower"></div>
-        <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-gradient-to-r from-emerald-700 to-purple-700 rounded-full filter blur-3xl opacity-15 animate-pulse-medium"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-60 h-60 bg-gradient-to-r from-purple-900 to-emerald-800 rounded-full filter blur-3xl opacity-15 animate-pulse-slow"></div>
-      </div> 
-      {/* Grid Overlay */}
-      <div className="fixed inset-0 z-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PHBhdGggZD0iTTAgMEg1MFY1MEgwWiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=')]"></div>  
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/30 border-b border-emerald-500/10 py-6 px-8 flex justify-between items-center">
-        <div className="text-2xl font-bold tracking-wider">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-purple-500">NEXUS</span>
-          <span className="text-white">STUDIO</span>
-        </div>
-        
-        <div className="hidden md:flex space-x-10">
-          {['Home', 'Projects', 'Services', 'About', 'Contact'].map((item) => (
-            <a key={item} href="#" className="text-gray-300 hover:text-white transition-colors duration-300 group">
-              {item}
-              <span className="block h-0.5 bg-gradient-to-r from-emerald-400 to-purple-500 w-0 group-hover:w-full transition-all duration-500"></span>
-            </a>
-          ))}
-        </div>
-        
-        <button className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-purple-600 rounded-full hover:shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 text-sm font-medium group">
-          <span className="group-hover:tracking-widest transition-all">Get in Touch</span>
-        </button>
-      </nav>
-      
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center relative z-10 pt-16">
-        <div className="container mx-auto px-6 flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 mb-16 md:mb-0">
-            <div className="text-sm uppercase tracking-[0.3em] text-emerald-400 mb-4">Innovative Digital Experiences</div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              <span className="block">Crafting</span>
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-purple-500">Futuristic</span>
-              <span>Digital Luxury</span>
+    <div className="min-h-screen bg-black text-white overflow-hidden">
+      {/* Animated background elements */}
+      <div className="fixed inset-0 z-0 opacity-20">
+        {[...Array(10)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full bg-gradient-to-r from-emerald-500 to-purple-500 animate-pulse"
+            style={{
+              width: Math.random() * 100 + 50,
+              height: Math.random() * 100 + 50,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${i * 0.5}s`,
+              animationDuration: `${Math.random() * 10 + 10}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Header/Navigation */}
+      <header className="relative z-10 border-b border-gray-800 bg-black bg-opacity-70 backdrop-blur-md">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
+              DEV<span className="text-white">X</span>
             </h1>
-            <p className="text-gray-300 text-lg mb-10 max-w-xl">
-              We create premium digital experiences that blend cutting-edge technology with elegant design. 
-              Our work transforms visions into immersive realities for the most discerning clients.
-            </p>
-            <div className="flex flex-wrap gap-6">
-              <button className="px-8 py-3.5 bg-gradient-to-r from-emerald-500 to-purple-600 rounded-full hover:shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 text-base font-medium group">
-                <span className="group-hover:tracking-wider transition-all">View Projects</span>
-              </button>
-              <button className="px-8 py-3.5 border border-emerald-500/30 rounded-full hover:bg-emerald-500/5 transition-all duration-300 text-base font-medium">
-                Learn More
-              </button>
-            </div>
           </div>
-          
-          <div className="md:w-1/2 flex justify-center">
-            <div className="relative">
-              <div className="w-80 h-80 rounded-full bg-gradient-to-r from-emerald-500/10 to-purple-600/10 absolute -top-10 -left-10 animate-pulse"></div>
-              <div className="w-80 h-80 rounded-full bg-gradient-to-r from-emerald-500/10 to-purple-600/10 absolute -bottom-10 -right-10 animate-pulse"></div>
+
+          <nav className="hidden md:flex space-x-8">
+            {['home', 'skills', 'projects', 'contact'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`relative py-2 text-sm uppercase tracking-wider font-medium ${
+                  activeTab === tab ? 'text-emerald-400' : 'text-gray-400 hover:text-white'
+                } transition-colors`}
+              >
+                {tab}
+                {activeTab === tab && (
+                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-emerald-500 to-purple-500"></div>
+                )}
+              </button>
+            ))}
+          </nav>
+
+          <button className="px-6 py-2 bg-gradient-to-r from-emerald-500 to-purple-500 rounded-full font-medium hover:opacity-90 transition-opacity">
+            Contact Me
+          </button>
+        </div>
+      </header>
+
+      <main className="relative z-10 container mx-auto px-4 py-12">
+        {/* Hero Section */}
+        {activeTab === 'home' && (
+          <section className="mb-20">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-5xl md:text-6xl font-bold mb-6">
+                  Full-Stack
+                  <span className="block bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
+                    Web Developer
+                  </span>
+                </h2>
+                
+                <p className="text-gray-300 text-lg mb-8">
+                  Creating cutting-edge digital experiences with modern technologies. 
+                  Specialized in responsive design, performance optimization, and scalable architecture.
+                </p>
+                
+                <div className="flex space-x-4">
+                  <button className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-purple-500 rounded-lg font-medium">
+                    View Projects
+                  </button>
+                  <button className="px-6 py-3 border border-gray-700 rounded-lg font-medium hover:border-emerald-500 transition-colors">
+                    Download CV
+                  </button>
+                </div>
+              </div>
               
-              <div className="relative bg-black/30 backdrop-blur-lg border border-emerald-500/20 rounded-2xl overflow-hidden w-[420px] h-[420px] shadow-2xl shadow-emerald-500/10">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-64 h-64 rounded-full bg-gradient-to-r from-emerald-500/20 to-purple-600/20 animate-ping opacity-10"></div>
+              <div className="relative">
+                <div className="aspect-square rounded-full bg-gradient-to-br from-emerald-500/10 to-purple-500/10 p-12 flex items-center justify-center">
+                  <div className="w-full h-full rounded-full border-2 border-emerald-500/30 relative">
+                    <div className="absolute inset-0 rounded-full border-2 border-purple-500/30 animate-ping"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
+                        DEV X
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-10">
-                  <div className="text-emerald-400 text-2xl font-bold mb-4">Digital Innovation</div>
-                  <div className="grid grid-cols-3 gap-4">
-                    {[...Array(6)].map((_, i) => (
-                      <div key={i} className="bg-black/40 backdrop-blur-sm border border-emerald-500/10 rounded-xl w-20 h-20 flex items-center justify-center">
-                        <div className={`w-8 h-8 rounded-full ${i % 3 === 0 ? 'bg-emerald-500/30' : i % 3 === 1 ? 'bg-purple-500/30' : 'bg-emerald-500/20'}`}></div>
-                      </div>
+                {/* Floating elements */}
+                <div className="absolute -top-4 -left-4 w-24 h-24 rounded-lg border border-emerald-500/30 animate-pulse"></div>
+                <div className="absolute -bottom-4 -right-4 w-16 h-16 rounded-lg border border-purple-500/30 animate-pulse"></div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Skills Section */}
+        {activeTab === 'skills' && (
+          <section className="mb-20">
+            <h2 className="text-4xl font-bold mb-12 text-center">
+              <span className="bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
+                Technical Skills
+              </span>
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              {skills.map((skill, index) => (
+                <div
+                  key={skill.name}
+                  className="bg-gray-900 bg-opacity-50 rounded-xl p-6 border border-gray-800"
+                >
+                  <div className="flex justify-between mb-2">
+                    <span className="font-medium">{skill.name}</span>
+                    <span className="text-emerald-400">{skill.level}%</span>
+                  </div>
+                  <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-emerald-500 to-purple-500 transition-all duration-1000"
+                      style={{ width: `${skill.level}%` }}
+                    ></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Projects Section */}
+        {activeTab === 'projects' && (
+          <section className="mb-20">
+            <h2 className="text-4xl font-bold mb-12 text-center">
+              <span className="bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
+                Featured Projects
+              </span>
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              {projects.map((project, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-900 bg-opacity-50 rounded-xl p-6 border border-gray-800 hover:border-emerald-500 transition-all duration-300 group"
+                >
+                  <div className="mb-4 h-48 bg-gradient-to-br from-emerald-500/10 to-purple-500/10 rounded-lg flex items-center justify-center">
+                    <div className="text-5xl opacity-30 group-hover:opacity-50 transition-opacity">
+                      <i className="fas fa-code"></i>
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                  <p className="text-gray-300 mb-4">{project.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag, i) => (
+                      <span
+                        key={i}
+                        className="px-3 py-1 bg-emerald-900/30 text-emerald-400 rounded-full text-xs"
+                      >
+                        {tag}
+                      </span>
                     ))}
                   </div>
-                  <div className="mt-6 text-center">
-                    <div className="text-xl font-light mb-2">Cutting-edge solutions</div>
-                    <div className="text-sm text-gray-400">Premium digital experiences</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Projects Preview */}
-      <section className="py-28 relative z-10">
-        <div className="container mx-auto px-6">
-          <div className="flex justify-between items-end mb-16">
-            <div>
-              <div className="text-sm uppercase tracking-[0.3em] text-emerald-400 mb-2">Featured Work</div>
-              <h2 className="text-4xl font-bold">Premium <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-purple-500">Projects</span></h2>
-            </div>
-            <div className="text-emerald-300 hover:text-white transition-colors cursor-pointer">
-              View all projects →
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="bg-black/30 backdrop-blur-lg border border-emerald-500/20 rounded-2xl overflow-hidden group">
-                <div className="h-56 bg-gradient-to-br from-emerald-900/50 to-purple-900/50 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className={`w-32 h-32 rounded-full ${item === 1 ? 'bg-emerald-500/20' : item === 2 ? 'bg-purple-500/20' : 'bg-gradient-to-r from-emerald-500/20 to-purple-500/20'} animate-pulse`}></div>
-                  </div>
-                  <div className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-purple-500 z-10">
-                    0{item}
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-emerald-400 transition-colors">Project Title {item}</h3>
-                  <p className="text-gray-400 mb-4">Premium digital solution for luxury brand experience</p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="text-xs px-3 py-1 bg-emerald-900/30 text-emerald-300 rounded-full">UI/UX</span>
-                    <span className="text-xs px-3 py-1 bg-purple-900/30 text-purple-300 rounded-full">Development</span>
-                    <span className="text-xs px-3 py-1 bg-emerald-900/30 text-emerald-300 rounded-full">Branding</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      
-      {/* Stats Section */}
-      <section className="py-20 relative z-10">
-        <div className="container mx-auto px-6">
-          <div className="bg-gradient-to-r from-emerald-900/20 to-purple-900/20 backdrop-blur-lg border border-emerald-500/20 rounded-3xl p-12">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {[
-                { value: '15+', label: 'Years Experience' },
-                { value: '240+', label: 'Projects' },
-                { value: '98%', label: 'Client Satisfaction' },
-                { value: '36', label: 'Awards Won' }
-              ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-purple-500">
-                    {stat.value}
-                  </div>
-                  <div className="text-gray-300">{stat.label}</div>
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Footer */}
-      <footer className="relative z-10 pt-20 pb-10 border-t border-emerald-500/10">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-8 md:mb-0">
-              <div className="text-2xl font-bold mb-4">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-purple-500">NEXUS</span>
-                <span className="text-white">STUDIO</span>
-              </div>
-              <p className="text-gray-400 max-w-md">
-                Crafting premium digital experiences with futuristic design and cutting-edge technology.
-              </p>
-            </div>
+          </section>
+        )}
+
+        {/* Contact Section */}
+        {activeTab === 'contact' && (
+          <section className="mb-20">
+            <h2 className="text-4xl font-bold mb-12 text-center">
+              <span className="bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
+                Get In Touch
+              </span>
+            </h2>
             
-            <div className="flex space-x-6">
-              {['twitter', 'dribbble', 'instagram', 'linkedin'].map((social) => (
-                <a key={social} href="#" className="w-12 h-12 rounded-full border border-emerald-500/20 flex items-center justify-center hover:bg-emerald-500/10 transition-colors">
-                  <div className="w-5 h-5 bg-gradient-to-r from-emerald-400 to-purple-500 rounded-full"></div>
-                </a>
-              ))}
+            <div className="grid md:grid-cols-2 gap-12">
+              <div>
+                <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 rounded-full bg-emerald-900/30 flex items-center justify-center">
+                      <i className="fas fa-envelope text-emerald-400"></i>
+                    </div>
+                    <div>
+                      <p className="text-gray-400">Email</p>
+                      <p>contact@devx.example</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 rounded-full bg-purple-900/30 flex items-center justify-center">
+                      <i className="fas fa-phone text-purple-400"></i>
+                    </div>
+                    <div>
+                      <p className="text-gray-400">Phone</p>
+                      <p>+1 (555) 123-4567</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 rounded-full bg-emerald-900/30 flex items-center justify-center">
+                      <i className="fas fa-map-marker-alt text-emerald-400"></i>
+                    </div>
+                    <div>
+                      <p className="text-gray-400">Location</p>
+                      <p>San Francisco, CA</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-8">
+                  <h4 className="text-xl font-bold mb-4">Follow Me</h4>
+                  <div className="flex space-x-4">
+                    {['github', 'twitter', 'linkedin', 'dribbble'].map((platform) => (
+                      <a
+                        key={platform}
+                        href="#"
+                        className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-emerald-500 transition-colors"
+                      >
+                        <i className={`fab fa-${platform}`}></i>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-gray-900 bg-opacity-50 rounded-xl p-8 border border-gray-800">
+                <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
+                
+                <form className="space-y-6">
+                  <div>
+                    <label className="block text-gray-400 mb-2">Name</label>
+                    <input
+                      type="text"
+                      className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 transition-colors"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-gray-400 mb-2">Email</label>
+                    <input
+                      type="email"
+                      className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 transition-colors"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-gray-400 mb-2">Message</label>
+                    <textarea
+                      rows="5"
+                      className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 transition-colors"
+                    ></textarea>
+                  </div>
+                  
+                  <button
+                    type="submit"
+                    className="w-full px-6 py-3 bg-gradient-to-r from-emerald-500 to-purple-500 rounded-lg font-medium hover:opacity-90 transition-opacity"
+                  >
+                    Send Message
+                  </button>
+                </form>
+              </div>
             </div>
-          </div>
-          
-          <div className="border-t border-emerald-500/10 mt-12 pt-8 text-center text-gray-500 text-sm">
-            © {new Date().getFullYear()} Nexus Studio. All rights reserved.
-          </div>
+          </section>
+        )}
+      </main>
+
+      <footer className="relative z-10 border-t border-gray-800 bg-black bg-opacity-70 backdrop-blur-md py-8">
+        <div className="container mx-auto px-4 text-center text-gray-400">
+          <p>© {new Date().getFullYear()} DevX Portfolio. All rights reserved.</p>
         </div>
       </footer>
-      
-      {/* Custom Animation Keyframes */}
-      <style jsx global>{`
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 0.15; }
-        }
-        @keyframes pulse-slower {
-          0%, 100% { opacity: 0.2; }
-          50% { opacity: 0.1; }
-        }
-        @keyframes pulse-medium {
-          0%, 100% { opacity: 0.15; }
-          50% { opacity: 0.05; }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        .animate-pulse-slower {
-          animation: pulse-slower 12s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        .animate-pulse-medium {
-          animation: pulse-medium 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-      `}</style>
     </div>
   );
-}
+};
+
+export default page;
