@@ -88,7 +88,7 @@ const FuturisticPortfolio = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-400 hover:text-white"
+            className=" text-gray-400 hover:text-white"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
