@@ -293,7 +293,7 @@ const page = () => {
                   <div>
                     <label className="block text-gray-400 mb-2">Message</label>
                     <textarea
-                      rows="5"
+                      rows={5}
                       className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 transition-colors"
                     ></textarea>
                   </div>
