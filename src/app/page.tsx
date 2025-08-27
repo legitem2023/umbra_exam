@@ -1,11 +1,23 @@
 // components/FuturisticPortfolio.jsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const FuturisticPortfolio = () => {
   const [activeTab, setActiveTab] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Add Font Awesome CSS
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+    document.head.appendChild(link);
+    
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
 
   // Skills Data
   const skills = [
@@ -86,10 +98,11 @@ const FuturisticPortfolio = () => {
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Fixed visibility */}
           <button
-            className=" text-gray-400 hover:text-white"
+            className="md:hidden p-2 rounded-md border border-gray-700 text-gray-400 hover:text-white hover:border-emerald-500 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
             {mobileMenuOpen ? (
               <i className="fas fa-times text-xl"></i>
@@ -101,7 +114,7 @@ const FuturisticPortfolio = () => {
 
         {/* Mobile Nav */}
         {mobileMenuOpen && (
-          <div className="px-4 pb-4 space-y-2 bg-black bg-opacity-90 border-t border-gray-800">
+          <div className="md:hidden px-4 pb-4 space-y-2 bg-black bg-opacity-90 border-t border-gray-800">
             {['home', 'skills', 'projects', 'contact'].map((tab) => (
               <button
                 key={tab}
@@ -109,9 +122,11 @@ const FuturisticPortfolio = () => {
                   setActiveTab(tab);
                   setMobileMenuOpen(false);
                 }}
-                className={`block w-full text-left py-2 text-sm uppercase font-medium ${
-                  activeTab === tab ? 'text-emerald-400' : 'text-gray-400 hover:text-white'
-                }`}
+                className={`block w-full text-left py-3 px-4 text-sm uppercase font-medium rounded-md ${
+                  activeTab === tab 
+                    ? 'text-emerald-400 bg-emerald-900/20' 
+                    : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                } transition-colors`}
               >
                 {tab}
               </button>
@@ -120,7 +135,7 @@ const FuturisticPortfolio = () => {
         )}
       </header>
 
-      {/* Main Content */}
+      {/* Rest of your content remains the same */}
       <main className="relative z-10 container mx-auto px-4 py-12">
         {/* Home Section */}
         {activeTab === 'home' && (
@@ -129,20 +144,21 @@ const FuturisticPortfolio = () => {
               {/* Intro */}
               <div>
                 <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                  Hi, I’m <span className="text-emerald-400">Robert Marquez</span>
+                  Hi, I'm <span className="text-emerald-400">Robert Marquez</span>
                 </h2>
 
                 <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6">
-                  I’m a passionate <span className="font-semibold text-white">Full Stack Web Developer</span> 
+                  I'm a passionate <span className="font-semibold text-white">Full Stack Web Developer</span> 
                   with a knack for crafting elegant and efficient digital solutions. With over 5 years of 
                   experience, I thrive on bringing ideas to life through clean, maintainable code and intuitive 
                   user interfaces. 
                 </p>
 
-  
-
                 <div className="flex flex-wrap gap-4">
-                  <button className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-purple-500 rounded-lg font-medium text-sm sm:text-base">
+                  <button 
+                    className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-purple-500 rounded-lg font-medium text-sm sm:text-base"
+                    onClick={() => setActiveTab('projects')}
+                  >
                     View Projects
                   </button>
                   <button className="px-6 py-3 border border-gray-700 rounded-lg font-medium text-sm sm:text-base hover:border-emerald-500 transition-colors">
