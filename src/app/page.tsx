@@ -53,31 +53,22 @@ const FuturisticPortfolio = () => {
     { name: 'TypeScript', level: 85 },
     { name: 'MongoDB', level: 80 },
     { name: 'CSS/Tailwind', level: 95 },
-    { name: 'AWS', level: 75 },
+    { name: 'ThreeJS', level: 75 },
+    { name: 'GraphQL', level: 90 },
   ];
 
   // Projects Data
   const projects = [
     {
-      title: 'E-Commerce Platform',
-      description: 'Full-stack e-commerce solution with payment integration',
-      tags: ['Next.js', 'Stripe', 'MongoDB'],
+      title: 'Motogo',
+      description: 'Full-stack logistics solution with payment integration',
+      tags: ['Next.js', 'MongoDB','Node.js],
     },
     {
-      title: 'AI Content Generator',
-      description: 'AI-powered content creation tool with GPT integration',
-      tags: ['React', 'OpenAI', 'Node.js'],
-    },
-    {
-      title: 'Crypto Dashboard',
-      description: 'Real-time cryptocurrency tracking dashboard',
-      tags: ['Next.js', 'WebSocket', 'Chart.js'],
-    },
-    {
-      title: 'Task Management App',
-      description: 'Productivity app with team collaboration features',
-      tags: ['React', 'Firebase', 'Material UI'],
-    },
+      title: 'Crowd',
+      description: 'Full-stack e-commerce solution',
+      tags: ['Next.js', 'MongoDB', 'Node.js'],
+    }
   ];
 
   // Animation classes based on direction
