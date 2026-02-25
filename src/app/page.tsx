@@ -47,7 +47,7 @@ const FuturisticPortfolio = () => {
     }
   };
 
-  const handleTabChange = (tab) => {
+  const handleTabChange = (tab:any) => {
     if (tab === activeTab) return;
     setActiveTab(tab);
     setMobileMenuOpen(false);
