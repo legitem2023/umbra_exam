@@ -1,14 +1,63 @@
 // components/FuturisticPortfolio.jsx
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, ChangeEvent, FormEvent } from 'react';
+
+// Define types
+type TabType = 'home' | 'skills' | 'projects' | 'contact';
+
+interface Skill {
+  name: string;
+  level: number;
+}
+
+interface Project {
+  title: string;
+  description: string;
+  tags: string[];
+}
+
+interface ContactInfo {
+  icon: string;
+  platform: string;
+  value: string;
+  color: string;
+}
+
+interface SliderStyle {
+  left: number;
+  width: number;
+  opacity: number;
+}
+
+// Form data type
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 const FuturisticPortfolio = () => {
-  const [activeTab, setActiveTab] = useState('home');
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [sliderStyle, setSliderStyle] = useState({ left: 0, width: 0, opacity: 0 });
-  const navRef:any = useRef(null);
-  const tabRefs:any = useRef({});
+  const [activeTab, setActiveTab] = useState<TabType>('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [sliderStyle, setSliderStyle] = useState<SliderStyle>({ left: 0, width: 0, opacity: 0 });
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [formStatus, setFormStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({
+    type: null,
+    message: ''
+  });
+
+  const navRef = useRef<HTMLElement | null>(null);
+  const tabRefs = useRef<Record<TabType, HTMLButtonElement | null>>({
+    home: null,
+    skills: null,
+    projects: null,
+    contact: null
+  });
 
   // Add Font Awesome CSS
   useEffect(() => {
@@ -29,8 +78,8 @@ const FuturisticPortfolio = () => {
     return () => window.removeEventListener('resize', updateSliderPosition);
   }, [activeTab]);
 
-  const updateSliderPosition = () => {
-    if (tabRefs.current[activeTab]) {
+  const updateSliderPosition = (): void => {
+    if (tabRefs.current[activeTab] && navRef.current) {
       const tabElement = tabRefs.current[activeTab];
       const navElement = navRef.current;
       
@@ -47,14 +96,63 @@ const FuturisticPortfolio = () => {
     }
   };
 
-  const handleTabChange = (tab:any) => {
+  const handleTabChange = (tab: TabType): void => {
     if (tab === activeTab) return;
     setActiveTab(tab);
     setMobileMenuOpen(false);
   };
 
-  // Skills Data
-  const skills = [
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    
+    // Simple validation
+    if (!formData.name || !formData.email || !formData.message) {
+      setFormStatus({
+        type: 'error',
+        message: 'Please fill in all fields'
+      });
+      return;
+    }
+
+    if (!formData.email.includes('@')) {
+      setFormStatus({
+        type: 'error',
+        message: 'Please enter a valid email address'
+      });
+      return;
+    }
+
+    // Here you would typically send the form data to your backend
+    console.log('Form submitted:', formData);
+    
+    setFormStatus({
+      type: 'success',
+      message: 'Message sent successfully!'
+    });
+
+    // Clear form
+    setFormData({
+      name: '',
+      email: '',
+      message: ''
+    });
+
+    // Clear success message after 5 seconds
+    setTimeout(() => {
+      setFormStatus({ type: null, message: '' });
+    }, 5000);
+  };
+
+  // Skills Data with proper typing
+  const skills: Skill[] = [
     { name: 'React/Next.js', level: 95 },
     { name: 'Node.js', level: 90 },
     { name: 'TypeScript', level: 85 },
@@ -64,8 +162,8 @@ const FuturisticPortfolio = () => {
     { name: 'GraphQL', level: 90 },
   ];
 
-  // Projects Data
-  const projects = [
+  // Projects Data with proper typing
+  const projects: Project[] = [
     {
       title: 'Motogo',
       description: 'Full-stack logistics solution with payment integration',
@@ -77,6 +175,15 @@ const FuturisticPortfolio = () => {
       tags: ['Next.js', 'MongoDB', 'Node.js'],
     }
   ];
+
+  // Contact info with proper typing
+  const contactInfo: ContactInfo[] = [
+    { icon: 'envelope', platform: 'Email', value: 'contact@devx.example', color: 'emerald' },
+    { icon: 'phone', platform: 'Phone', value: '+1 (555) 123-4567', color: 'purple' },
+    { icon: 'map-marker-alt', platform: 'Location', value: 'San Francisco, CA', color: 'emerald' }
+  ];
+
+  const tabs: TabType[] = ['home', 'skills', 'projects', 'contact'];
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
@@ -159,6 +266,20 @@ const FuturisticPortfolio = () => {
         .content-section {
           transition: opacity 0.3s ease;
         }
+
+        /* Form input styles */
+        .form-input {
+          transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+          box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Status message animations */
+        .status-message {
+          animation: slideInRight 0.3s ease-out;
+        }
       `}</style>
 
       {/* Background Animation */}
@@ -197,14 +318,17 @@ const FuturisticPortfolio = () => {
               style={sliderStyle}
             />
             
-            {['home', 'skills', 'projects', 'contact'].map((tab) => (
+            {tabs.map((tab) => (
               <button
                 key={tab}
-                ref={el => tabRefs.current[tab] = el}
+                ref={el => {
+                  tabRefs.current[tab] = el;
+                }}
                 onClick={() => handleTabChange(tab)}
                 className={`relative py-2 text-sm uppercase tracking-wider font-medium transition-colors duration-300 ${
                   activeTab === tab ? 'text-emerald-400' : 'text-gray-400 hover:text-white'
                 }`}
+                type="button"
               >
                 {tab}
               </button>
@@ -216,6 +340,7 @@ const FuturisticPortfolio = () => {
             className="md:hidden p-2 rounded-md border border-gray-700 text-gray-400 hover:text-white hover:border-emerald-500 transition-all duration-300"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
+            type="button"
           >
             {mobileMenuOpen ? (
               <i className="fas fa-times text-xl"></i>
@@ -228,7 +353,7 @@ const FuturisticPortfolio = () => {
         {/* Mobile Nav with animation */}
         <div className={`md:hidden overflow-hidden transition-all duration-300 ${mobileMenuOpen ? 'max-h-64' : 'max-h-0'}`}>
           <div className="px-4 pb-4 space-y-2 bg-black bg-opacity-90 border-t border-gray-800">
-            {['home', 'skills', 'projects', 'contact'].map((tab) => (
+            {tabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => handleTabChange(tab)}
@@ -237,6 +362,7 @@ const FuturisticPortfolio = () => {
                     ? 'text-emerald-400 bg-emerald-900/20' 
                     : 'text-gray-400 hover:text-white hover:bg-gray-800'
                 } transition-all duration-300 transform hover:translate-x-2`}
+                type="button"
               >
                 {tab}
               </button>
@@ -268,10 +394,14 @@ const FuturisticPortfolio = () => {
                   <button 
                     className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-purple-500 rounded-lg font-medium text-sm sm:text-base gradient-button"
                     onClick={() => handleTabChange('projects')}
+                    type="button"
                   >
                     View Projects
                   </button>
-                  <button className="px-6 py-3 border border-gray-700 rounded-lg font-medium text-sm sm:text-base hover:border-emerald-500 transition-all duration-300 transform hover:-translate-y-1">
+                  <button 
+                    className="px-6 py-3 border border-gray-700 rounded-lg font-medium text-sm sm:text-base hover:border-emerald-500 transition-all duration-300 transform hover:-translate-y-1"
+                    type="button"
+                  >
                     Download CV
                   </button>
                 </div>
@@ -383,11 +513,7 @@ const FuturisticPortfolio = () => {
               <div>
                 <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
                 <div className="space-y-4">
-                  {[
-                    { icon: 'envelope', platform: 'Email', value: 'contact@devx.example', color: 'emerald' },
-                    { icon: 'phone', platform: 'Phone', value: '+1 (555) 123-4567', color: 'purple' },
-                    { icon: 'map-marker-alt', platform: 'Location', value: 'San Francisco, CA', color: 'emerald' }
-                  ].map((item, index) => (
+                  {contactInfo.map((item, index) => (
                     <div 
                       key={index} 
                       className="flex items-center space-x-4"
@@ -412,6 +538,7 @@ const FuturisticPortfolio = () => {
                         href="#"
                         className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-emerald-500 transition-all duration-300 transform hover:-translate-y-1"
                         style={{ animationDelay: `${index * 0.1}s` }}
+                        onClick={(e) => e.preventDefault()}
                       >
                         <i className={`fab fa-${platform}`}></i>
                       </a>
@@ -423,26 +550,54 @@ const FuturisticPortfolio = () => {
               {/* Contact Form */}
               <div className="bg-gray-900 bg-opacity-50 rounded-xl p-8 border border-gray-800">
                 <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
-                <form className="space-y-6">
+                
+                {/* Status Message */}
+                {formStatus.type && (
+                  <div className={`mb-4 p-3 rounded-lg ${
+                    formStatus.type === 'success' ? 'bg-emerald-900/50 text-emerald-400' : 'bg-red-900/50 text-red-400'
+                  } status-message`}>
+                    {formStatus.message}
+                  </div>
+                )}
+
+                <form className="space-y-6" onSubmit={handleSubmit}>
                   <div style={{ animationDelay: '0.1s' }}>
-                    <label className="block text-gray-400 mb-2">Name</label>
+                    <label htmlFor="name" className="block text-gray-400 mb-2">Name</label>
                     <input
                       type="text"
-                      className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 transition-all duration-300"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 transition-all duration-300 form-input"
+                      placeholder="Your name"
+                      required
                     />
                   </div>
                   <div style={{ animationDelay: '0.2s' }}>
-                    <label className="block text-gray-400 mb-2">Email</label>
+                    <label htmlFor="email" className="block text-gray-400 mb-2">Email</label>
                     <input
                       type="email"
-                      className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 transition-all duration-300"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 transition-all duration-300 form-input"
+                      placeholder="your@email.com"
+                      required
                     />
                   </div>
                   <div style={{ animationDelay: '0.3s' }}>
-                    <label className="block text-gray-400 mb-2">Message</label>
+                    <label htmlFor="message" className="block text-gray-400 mb-2">Message</label>
                     <textarea
+                      id="message"
+                      name="message"
                       rows={5}
-                      className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 transition-all duration-300"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 transition-all duration-300 form-input"
+                      placeholder="Your message..."
+                      required
                     ></textarea>
                   </div>
                   <button
