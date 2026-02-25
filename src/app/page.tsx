@@ -7,8 +7,8 @@ const FuturisticPortfolio = () => {
   const [activeTab, setActiveTab] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [sliderStyle, setSliderStyle] = useState({ left: 0, width: 0, opacity: 0 });
-  const navRef = useRef(null);
-  const tabRefs = useRef({});
+  const navRef:any = useRef(null);
+  const tabRefs:any = useRef({});
 
   // Add Font Awesome CSS
   useEffect(() => {
