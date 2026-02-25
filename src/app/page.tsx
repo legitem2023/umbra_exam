@@ -6,9 +6,9 @@ import { useState, useEffect, useRef } from 'react';
 const FuturisticPortfolio = () => {
   const [activeTab, setActiveTab] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [direction, setDirection] = useState('right');
-  const [isAnimating, setIsAnimating] = useState(false);
-  const prevTabRef = useRef('home');
+  const [sliderStyle, setSliderStyle] = useState({ left: 0, width: 0, opacity: 0 });
+  const navRef = useRef(null);
+  const tabRefs = useRef({});
 
   // Add Font Awesome CSS
   useEffect(() => {
@@ -22,28 +22,35 @@ const FuturisticPortfolio = () => {
     };
   }, []);
 
-  const handleTabChange = (tab:any) => {
-    if (tab === activeTab || isAnimating) return;
-    
-    setIsAnimating(true);
-    const tabs = ['home', 'skills', 'projects', 'contact'];
-    const currentIndex = tabs.indexOf(activeTab);
-    const newIndex = tabs.indexOf(tab);
-    
-    // Determine animation direction
-    setDirection(newIndex > currentIndex ? 'left' : 'right');
-    
-    // Update previous tab reference
-    prevTabRef.current = activeTab;
-    
-    // Change tab after a small delay to allow animation to start
-    setTimeout(() => {
-      setActiveTab(tab);
-      setMobileMenuOpen(false);
-    }, 100);
-    
-    // Reset animation state after transition completes
-    setTimeout(() => setIsAnimating(false), 500);
+  // Update slider position when active tab changes
+  useEffect(() => {
+    updateSliderPosition();
+    window.addEventListener('resize', updateSliderPosition);
+    return () => window.removeEventListener('resize', updateSliderPosition);
+  }, [activeTab]);
+
+  const updateSliderPosition = () => {
+    if (tabRefs.current[activeTab]) {
+      const tabElement = tabRefs.current[activeTab];
+      const navElement = navRef.current;
+      
+      if (tabElement && navElement) {
+        const tabRect = tabElement.getBoundingClientRect();
+        const navRect = navElement.getBoundingClientRect();
+        
+        setSliderStyle({
+          left: tabRect.left - navRect.left,
+          width: tabRect.width,
+          opacity: 1
+        });
+      }
+    }
+  };
+
+  const handleTabChange = (tab) => {
+    if (tab === activeTab) return;
+    setActiveTab(tab);
+    setMobileMenuOpen(false);
   };
 
   // Skills Data
@@ -62,7 +69,7 @@ const FuturisticPortfolio = () => {
     {
       title: 'Motogo',
       description: 'Full-stack logistics solution with payment integration',
-      tags: ['Next.js', 'MongoDB','Node.js],
+      tags: ['Next.js', 'MongoDB', 'Node.js'],
     },
     {
       title: 'Crowd',
@@ -70,17 +77,6 @@ const FuturisticPortfolio = () => {
       tags: ['Next.js', 'MongoDB', 'Node.js'],
     }
   ];
-
-  // Animation classes based on direction
-  const getAnimationClass = (tab:any) => {
-    if (tab !== activeTab) return 'hidden';
-    
-    if (direction === 'right') {
-      return 'animate-slide-in-right';
-    } else {
-      return 'animate-slide-in-left';
-    }
-  };
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
@@ -153,6 +149,16 @@ const FuturisticPortfolio = () => {
         .gradient-button:hover {
           background-position: 100% 0;
         }
+
+        /* Sliding tab animation */
+        .nav-slider {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Content transition */
+        .content-section {
+          transition: opacity 0.3s ease;
+        }
       `}</style>
 
       {/* Background Animation */}
@@ -180,20 +186,27 @@ const FuturisticPortfolio = () => {
             DEV<span className="text-white">R</span>
           </h1>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex space-x-8">
+          {/* Desktop Nav with Facebook-style slider */}
+          <nav 
+            ref={navRef}
+            className="hidden md:flex relative space-x-8"
+          >
+            {/* Sliding background indicator */}
+            <div
+              className="nav-slider absolute bottom-0 h-0.5 bg-gradient-to-r from-emerald-500 to-purple-500"
+              style={sliderStyle}
+            />
+            
             {['home', 'skills', 'projects', 'contact'].map((tab) => (
               <button
                 key={tab}
+                ref={el => tabRefs.current[tab] = el}
                 onClick={() => handleTabChange(tab)}
-                className={`relative py-2 text-sm uppercase tracking-wider font-medium ${
+                className={`relative py-2 text-sm uppercase tracking-wider font-medium transition-colors duration-300 ${
                   activeTab === tab ? 'text-emerald-400' : 'text-gray-400 hover:text-white'
-                } transition-all duration-300`}
+                }`}
               >
                 {tab}
-                {activeTab === tab && (
-                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-emerald-500 to-purple-500 animate-fade-in"></div>
-                )}
               </button>
             ))}
           </nav>
@@ -232,26 +245,26 @@ const FuturisticPortfolio = () => {
         </div>
       </header>
 
-      {/* Main Content with Transitions */}
+      {/* Main Content with smooth transitions */}
       <main className="relative z-10 container mx-auto px-4 py-12 overflow-hidden">
         {/* Home Section */}
-        <div className={activeTab === 'home' ? getAnimationClass('home') : 'hidden'}>
+        <div className={`content-section ${activeTab === 'home' ? 'block animate-fade-in' : 'hidden'}`}>
           <section className="mb-20">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               {/* Intro */}
               <div>
-                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight animate-fade-in">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
                   Hi, I'm <span className="text-emerald-400">Robert Marquez</span>
                 </h2>
 
-                <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6 animate-fade-in">
+                <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6">
                   I'm a passionate <span className="font-semibold text-white">Full Stack Web Developer</span> 
                   with a knack for crafting elegant and efficient digital solutions. With over 5 years of 
                   experience, I thrive on bringing ideas to life through clean, maintainable code and intuitive 
                   user interfaces. 
                 </p>
 
-                <div className="flex flex-wrap gap-4 animate-fade-in">
+                <div className="flex flex-wrap gap-4">
                   <button 
                     className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-purple-500 rounded-lg font-medium text-sm sm:text-base gradient-button"
                     onClick={() => handleTabChange('projects')}
@@ -266,7 +279,7 @@ const FuturisticPortfolio = () => {
 
               {/* Visual */}
               <div className="relative flex justify-center md:justify-end">
-                <div className="aspect-square w-64 sm:w-80 md:w-96 rounded-full bg-gradient-to-br from-emerald-500/10 to-purple-500/10 p-12 flex items-center justify-center animate-fade-in">
+                <div className="aspect-square w-64 sm:w-80 md:w-96 rounded-full bg-gradient-to-br from-emerald-500/10 to-purple-500/10 p-12 flex items-center justify-center">
                   <div className="w-full h-full rounded-full border-2 border-emerald-500/30 relative">
                     <div className="absolute inset-0 rounded-full border-2 border-purple-500/30 animate-ping"></div>
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -286,9 +299,9 @@ const FuturisticPortfolio = () => {
         </div>
 
         {/* Skills Section */}
-        <div className={activeTab === 'skills' ? getAnimationClass('skills') : 'hidden'}>
+        <div className={`content-section ${activeTab === 'skills' ? 'block animate-fade-in' : 'hidden'}`}>
           <section className="mb-20">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center animate-fade-in">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center">
               <span className="bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
                 Technical Skills
               </span>
@@ -298,7 +311,7 @@ const FuturisticPortfolio = () => {
               {skills.map((skill, index) => (
                 <div
                   key={skill.name}
-                  className="bg-gray-900 bg-opacity-50 rounded-xl p-6 border border-gray-800 animate-fade-in"
+                  className="bg-gray-900 bg-opacity-50 rounded-xl p-6 border border-gray-800"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="flex justify-between mb-2 text-sm sm:text-base">
@@ -318,9 +331,9 @@ const FuturisticPortfolio = () => {
         </div>
 
         {/* Projects Section */}
-        <div className={activeTab === 'projects' ? getAnimationClass('projects') : 'hidden'}>
+        <div className={`content-section ${activeTab === 'projects' ? 'block animate-fade-in' : 'hidden'}`}>
           <section className="mb-20">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center animate-fade-in">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center">
               <span className="bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
                 Featured Projects
               </span>
@@ -330,7 +343,7 @@ const FuturisticPortfolio = () => {
               {projects.map((project, index) => (
                 <div
                   key={index}
-                  className="bg-gray-900 bg-opacity-50 rounded-xl p-6 border border-gray-800 project-card animate-fade-in"
+                  className="bg-gray-900 bg-opacity-50 rounded-xl p-6 border border-gray-800 project-card"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="mb-4 h-48 bg-gradient-to-br from-emerald-500/10 to-purple-500/10 rounded-lg flex items-center justify-center">
@@ -357,9 +370,9 @@ const FuturisticPortfolio = () => {
         </div>
 
         {/* Contact Section */}
-        <div className={activeTab === 'contact' ? getAnimationClass('contact') : 'hidden'}>
+        <div className={`content-section ${activeTab === 'contact' ? 'block animate-fade-in' : 'hidden'}`}>
           <section className="mb-20">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center animate-fade-in">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center">
               <span className="bg-gradient-to-r from-emerald-400 to-purple-500 bg-clip-text text-transparent">
                 Get In Touch
               </span>
@@ -368,7 +381,7 @@ const FuturisticPortfolio = () => {
             <div className="grid md:grid-cols-2 gap-12">
               {/* Contact Info */}
               <div>
-                <h3 className="text-2xl font-bold mb-6 animate-fade-in">Contact Information</h3>
+                <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
                 <div className="space-y-4">
                   {[
                     { icon: 'envelope', platform: 'Email', value: 'contact@devx.example', color: 'emerald' },
@@ -377,7 +390,7 @@ const FuturisticPortfolio = () => {
                   ].map((item, index) => (
                     <div 
                       key={index} 
-                      className="flex items-center space-x-4 animate-fade-in"
+                      className="flex items-center space-x-4"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
                       <div className={`w-12 h-12 rounded-full bg-${item.color}-900/30 flex items-center justify-center transition-all duration-300 hover:scale-110`}>
@@ -391,13 +404,13 @@ const FuturisticPortfolio = () => {
                   ))}
                 </div>
                 <div className="mt-8">
-                  <h4 className="text-xl font-bold mb-4 animate-fade-in">Follow Me</h4>
+                  <h4 className="text-xl font-bold mb-4">Follow Me</h4>
                   <div className="flex space-x-4">
                     {['github', 'twitter', 'linkedin', 'dribbble'].map((platform, index) => (
                       <a
                         key={platform}
                         href="#"
-                        className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-emerald-500 transition-all duration-300 transform hover:-translate-y-1 animate-fade-in"
+                        className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-emerald-500 transition-all duration-300 transform hover:-translate-y-1"
                         style={{ animationDelay: `${index * 0.1}s` }}
                       >
                         <i className={`fab fa-${platform}`}></i>
@@ -408,24 +421,24 @@ const FuturisticPortfolio = () => {
               </div>
 
               {/* Contact Form */}
-              <div className="bg-gray-900 bg-opacity-50 rounded-xl p-8 border border-gray-800 animate-fade-in">
+              <div className="bg-gray-900 bg-opacity-50 rounded-xl p-8 border border-gray-800">
                 <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
                 <form className="space-y-6">
-                  <div className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
+                  <div style={{ animationDelay: '0.1s' }}>
                     <label className="block text-gray-400 mb-2">Name</label>
                     <input
                       type="text"
                       className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 transition-all duration-300"
                     />
                   </div>
-                  <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                  <div style={{ animationDelay: '0.2s' }}>
                     <label className="block text-gray-400 mb-2">Email</label>
                     <input
                       type="email"
                       className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-500 transition-all duration-300"
                     />
                   </div>
-                  <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
+                  <div style={{ animationDelay: '0.3s' }}>
                     <label className="block text-gray-400 mb-2">Message</label>
                     <textarea
                       rows={5}
@@ -434,7 +447,7 @@ const FuturisticPortfolio = () => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full px-6 py-3 bg-gradient-to-r from-emerald-500 to-purple-500 rounded-lg font-medium gradient-button animate-fade-in"
+                    className="w-full px-6 py-3 bg-gradient-to-r from-emerald-500 to-purple-500 rounded-lg font-medium gradient-button"
                     style={{ animationDelay: '0.4s' }}
                   >
                     Send Message
@@ -448,7 +461,7 @@ const FuturisticPortfolio = () => {
 
       {/* Footer */}
       <footer className="relative z-10 border-t border-gray-800 bg-black bg-opacity-70 backdrop-blur-md py-8">
-        <div className="container mx-auto px-4 text-center text-gray-400 text-sm animate-fade-in">
+        <div className="container mx-auto px-4 text-center text-gray-400 text-sm">
           <p>© {new Date().getFullYear()} DevX Portfolio. All rights reserved.</p>
         </div>
       </footer>
